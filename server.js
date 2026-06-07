@@ -1,11 +1,20 @@
-import express from "express";
-import { db, migrate } from "./src/config/database.js";
+import express from 'express';
+import { db, migrate } from './src/config/database.js';
+import initRoutes from './src/routes/routes.js';
 
 const app = express();
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+migrate(); // ← middlewares ke baad
+
+app.use('/api', initRoutes(db));
+
+
 const PORT = 3000;
 
-migrate();
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  //proper format localhost:3000/api/events
+  console.log(`Server is running on http://localhost:${PORT}/api`);
 });

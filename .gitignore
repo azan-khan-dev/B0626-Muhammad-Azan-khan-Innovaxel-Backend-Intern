@@ -1,2 +1,9 @@
+# SQLite database
+data.db
+*.db
+
+# Node modules
 node_modules/
-event_registration.db
+
+# env file
+.env
