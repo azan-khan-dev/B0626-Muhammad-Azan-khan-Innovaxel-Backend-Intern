@@ -8,6 +8,7 @@ const migrate = () => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       event_name TEXT UNIQUE NOT NULL,
       total_seats INTEGER NOT NULL,
+      available_seats INTEGER NOT NULL,
       registered_seats INTEGER NOT NULL DEFAULT 0,
       event_date TEXT NOT NULL
     );

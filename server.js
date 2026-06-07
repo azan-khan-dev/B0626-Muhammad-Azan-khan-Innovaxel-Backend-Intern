@@ -1,6 +1,7 @@
 import express from 'express';
 import { db, migrate } from './src/config/database.js';
 import initRoutes from './src/routes/routes.js';
+import errorHandler from './src/middlewares/error.middleware.js';
 
 const app = express();
 
@@ -10,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 migrate(); // ← middlewares ke baad
 
 app.use('/api', initRoutes(db));
-
+app.use(errorHandler); // ← routes ke baad
 
 const PORT = 3000;
 
