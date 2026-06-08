@@ -34,7 +34,7 @@ git clone https://github.com/azan-khan-dev/B0626-Muhammad-Azan-khan-Innovaxel-Ba
 
 ### 2. Navigate to Project Folder
 ```bash
-cd B0626-Muhammad-Azan-khan-Innovaxel-Backend-Intern
+cd Event-registration-system-api
 ```
 
 ### 3. Install Dependencies
