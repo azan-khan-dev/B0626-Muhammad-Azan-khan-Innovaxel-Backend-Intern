@@ -1,7 +1,6 @@
 import ApiError from "../errors/ApiError.js";
 import { parseDate, formatDate } from "../utils/date.utils.js";
 
-
 const createEvent = (db) => (req, res, next) => {
   try {
     const event_name = req.body.event_name?.trim().replace(/\s+/g, " ");
@@ -30,11 +29,15 @@ const createEvent = (db) => (req, res, next) => {
       throw new ApiError(409, "Event already exists");
     }
 
-    const result = db.prepare(`
+    const result = db
+      .prepare(
+        `
       INSERT INTO events 
       (event_name, total_seats, registered_seats, available_seats, event_date)
       VALUES (?, ?, 0, ?, ?)
-    `).run(event_name, total_seats, total_seats, parsedDate);
+    `,
+      )
+      .run(event_name, total_seats, total_seats, parsedDate);
 
     res.status(201).json({
       success: true,
@@ -44,12 +47,10 @@ const createEvent = (db) => (req, res, next) => {
       available_seats: total_seats,
       event_date: formatDate(parsedDate),
     });
-
   } catch (err) {
     next(err);
   }
 };
-
 
 const getEvents = (db) => (req, res, next) => {
   try {
@@ -86,7 +87,6 @@ const getEvents = (db) => (req, res, next) => {
       total_events: formattedEvents.length,
       data: formattedEvents,
     });
-
   } catch (err) {
     next(err);
   }
