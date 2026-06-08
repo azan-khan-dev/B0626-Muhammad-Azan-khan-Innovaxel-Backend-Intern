@@ -7,12 +7,9 @@ const errorHandler = (err, req, res, next) => {
     const stackLines = err.stack.split("\n");
 
     for (const lineStr of stackLines) {
-      // try multiple patterns
-
-      // 1. file:///C:/...:38:13
+     
       let match = lineStr.match(/(file:\/\/\/.*):(\d+):(\d+)/);
 
-      // 2. (C:\...:38:13)
       if (!match) {
         match = lineStr.match(/\((.*):(\d+):(\d+)\)/);
       }

@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 migrate(); // ← middlewares ke baad
 
 app.use('/api', initRoutes(db));
-app.use(errorHandler); // ← routes ke baad
+app.use(errorHandler);
 
 const PORT = 3000;
 

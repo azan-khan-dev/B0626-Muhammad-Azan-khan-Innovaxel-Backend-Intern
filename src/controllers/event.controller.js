@@ -1,9 +1,7 @@
 import ApiError from "../errors/ApiError.js";
 import { parseDate, formatDate } from "../utils/date.utils.js";
 
-/* =========================
-   CREATE EVENT
-========================= */
+
 const createEvent = (db) => (req, res, next) => {
   try {
     const event_name = req.body.event_name?.trim().replace(/\s+/g, " ");
@@ -52,9 +50,7 @@ const createEvent = (db) => (req, res, next) => {
   }
 };
 
-/* =========================
-   GET EVENTS
-========================= */
+
 const getEvents = (db) => (req, res, next) => {
   try {
     const { upcoming_only, sort_by_date } = req.query;
