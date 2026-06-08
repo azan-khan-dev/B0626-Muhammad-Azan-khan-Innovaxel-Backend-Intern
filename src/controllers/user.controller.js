@@ -15,7 +15,6 @@ const Register_User = (db) => (req, res, next) => {
       throw new ApiError(400, "User Name must be at least 3 characters long");
     }
 
-    // check event
     const event = db.prepare(
       "SELECT * FROM events WHERE id = ?"
     ).get(event_id);
@@ -24,12 +23,11 @@ const Register_User = (db) => (req, res, next) => {
       throw new ApiError(404, "Event not found cannot register user");
     }
 
-    // FIXED date check
+    
     if (new Date(event.event_date) < new Date()) {
       throw new ApiError(400, "Event date has already passed");
     }
 
-    // duplicate check
     const existingRegistration = db.prepare(
       "SELECT * FROM registrations WHERE user_name = ? AND event_id = ? AND status = 'active'"
     ).get(user_name, event_id);
@@ -40,14 +38,12 @@ const Register_User = (db) => (req, res, next) => {
 
 
 
-    //current date time check
     const now = new Date();
 const registered_at = new Date(now.getTime() + 5 * 60 * 60 * 1000)
   .toISOString()
   .replace('T', ' ')
   .slice(0, 19);
 
-    // transaction (SAFE)
     const tx = db.transaction(() => {
       const freshEvent = db.prepare(
         "SELECT * FROM events WHERE id = ?"
