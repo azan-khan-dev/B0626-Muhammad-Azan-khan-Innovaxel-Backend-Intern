@@ -64,7 +64,7 @@ Server will run at: `http://localhost:3000/api`
 
 ---
 
-## 🧪 Testing with Postman
+## 🧪 Testing with Postman (EXAMPLES)
 
 The API supports **two ways** to send data:
 
