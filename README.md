@@ -62,12 +62,16 @@ Server will run at: `http://localhost:3000/api`
 
 ### Base URL: `http://localhost:3000/api`
 
-> ⚠️ In Postman: Headers tab → `Content-Type: application/json`
-
 ---
 
-### 1. Create Event
-**POST** `/api/events`
+## 🧪 Testing with Postman
+
+The API supports **two ways** to send data:
+
+### Option 1 — Raw JSON
+1. Body tab → `raw` → `JSON`
+2. Headers tab → `Content-Type: application/json`
+3. Data aisa bhejo:
 ```json
 {
   "event_name": "Tech Conference",
@@ -75,6 +79,39 @@ Server will run at: `http://localhost:3000/api`
   "event_date": "2026-12-01"
 }
 ```
+
+### Option 2 — x-www-form-urlencoded
+1. Body tab → `x-www-form-urlencoded`
+2. Key-Value fields mein data bhejo:
+
+| Key | Value |
+|---|---|
+| event_name | Tech Conference |
+| total_seats | 50 |
+| event_date | 2026-12-01 |
+
+> ✅ Server dono formats accept karta hai
+
+---
+
+### 1. Create Event
+**POST** `/api/events`
+
+**JSON:**
+```json
+{
+  "event_name": "Tech Conference",
+  "total_seats": 50,
+  "event_date": "2026-12-01"
+}
+```
+
+**x-www-form-urlencoded:**
+| Key | Value |
+|---|---|
+| event_name | Tech Conference |
+| total_seats | 50 |
+| event_date | 2026-12-01 |
 
 ---
 
@@ -85,3 +122,57 @@ Server will run at: `http://localhost:3000/api`
 |---|---|---|
 | `upcoming_only` | `true` | Show only future events |
 | `sort_by_date` | `true` | Sort by date |
+
+
+
+
+---
+
+### 3. Register User
+**POST** `/api/register`
+
+**JSON:**
+```json
+{
+  "user_name": "Muhammad Azan",
+  "event_id": 1
+}
+```
+
+**x-www-form-urlencoded:**
+| Key | Value |
+|---|---|
+| user_name | Muhammad Azan |
+| event_id | 1 |
+
+---
+
+### 4. Cancel Registration
+**PATCH** `/api/cancel`
+
+**JSON:**
+```json
+{
+  "user_name": "Muhammad Azan",
+  "event_id": 1
+}
+```
+
+**x-www-form-urlencoded:**
+| Key | Value |
+|---|---|
+| user_name | Muhammad Azan |
+| event_id | 1 |
+
+
+
+## 🔒 Key Features
+
+- ✅ Race condition prevention — SQLite transactions
+- ✅ Duplicate registration handled
+- ✅ Seat count always accurate
+- ✅ PKT timezone (UTC+5)
+- ✅ Proper error messages for all edge cases
+- ✅ Input sanitization and validation
+
+
